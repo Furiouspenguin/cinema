@@ -25,7 +25,7 @@ public class Screening {
     @Column(name = "max_seat_count")
     private Integer maxSeatCount;
 
-    @Column(name = "picture_url")
+    @Column(name = "picture_url", columnDefinition = "TEXT")
     private String pictureUrl;
 
 }

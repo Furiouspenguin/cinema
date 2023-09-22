@@ -27,7 +27,7 @@ spring:
 logging:
   level:
     hu.progmasters: info
-    org.springframework.web: info
+    org.springframework.web: error
     org.hibernate: error
   pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
