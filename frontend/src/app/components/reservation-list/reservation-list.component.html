@@ -1,1 +1,24 @@
-<p>reservation-list works!</p>
+<div class="container w-75 shadow my-3 p-5 rounded" *ngIf="reservations">
+  <h1 class="text-center mb-3">Reservations:</h1>
+  <table class="table text-center table-hover table-striped">
+    <thead>
+    <tr class="table-success">
+      <th scope="col">Name</th>
+      <th scope="col">Title</th>
+      <th scope="col">Number of seats</th>
+      <th scope="col">Time of Screening</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let reservation of reservations">
+      <th [id]="reservation.id">{{reservation.name}}</th>
+      <td>{{reservation.title}}</td>
+      <td>{{reservation.seatCount}}</td>
+      <td>{{dateTimeFormatter(reservation.screeningDateTime)}}</td>
+    </tr>
+    </tbody>
+  </table>
+
+
+</div>
+

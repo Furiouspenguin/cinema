@@ -13,6 +13,7 @@ const routes: Routes = [
   {path: 'reservation-list', component: ReservationListComponent},
   {path: 'reservation-form', component: ReservationFormComponent},
   {path: 'summary', component: SummaryComponent},
+  {path: '**', component: ScreeningListComponent}
 ];
 
 @NgModule({

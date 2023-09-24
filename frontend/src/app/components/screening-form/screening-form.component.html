@@ -1,1 +1,98 @@
-<p>screening-form works!</p>
+<div class="container w-75 shadow my-3 p-5 rounded">
+  <h1 class="my-3">New Screening</h1>
+  <form [formGroup]="screeningForm" (ngSubmit)="saveScreening()">
+    <div class="mb-3">
+      <label
+        for="title"
+        class="form-label"
+        [ngClass]="{'text-danger':(screeningForm.get('title')?.invalid && screeningForm.get('title')?.touched)
+        ||(screeningForm.get('title')?.errors?.['serverError'])}"
+      >Title:</label>
+
+      <input
+        type="text"
+        class="form-control"
+        id="title"
+        placeholder="Movie Title"
+        formControlName="title"
+        [ngClass]="{'is-invalid':(screeningForm.get('title')?.invalid && screeningForm.get('title')?.touched)
+        ||(screeningForm.get('title')?.errors?.['serverError'])}"
+      >
+      <small class="text-danger" *ngIf="screeningForm.get('title')?.invalid && screeningForm.get('title')?.touched
+        && !screeningForm.get('title')?.errors?.['serverError']"
+      >
+        Please enter a valid title!
+      </small>
+      <small class="text-danger" *ngIf="screeningForm.get('title')?.errors?.['serverError']">
+        {{screeningForm.get("title")?.errors?.['serverError']}}
+      </small>
+    </div>
+
+
+
+    <div class="mb-3">
+      <label
+        for="screeningDateTime"
+        class="form-label"
+        [ngClass]="{'text-danger':(screeningForm.get('screeningDateTime')?.invalid
+        && screeningForm.get('screeningDateTime')?.touched)}"
+      >Date/Time:</label>
+
+      <input
+        type="datetime-local"
+        class="form-control"
+        id="screeningDateTime"
+        formControlName="screeningDateTime"
+      >
+      <small class="text-danger" *ngIf="screeningForm.get('maxSeatCount')?.invalid
+      && screeningForm.get('maxSeatCount')?.touched"
+    >
+        Please enter a valid date/time!
+    </small>
+    </div>
+
+    <div class="mb-3">
+      <label
+        for="maxSeatCount"
+        class="form-label"
+        [ngClass]="{'text-danger':(screeningForm.get('maxSeatCount')?.invalid && screeningForm.get('maxSeatCount')?.touched)
+        ||(screeningForm.get('maxSeatCount')?.errors?.['serverError'])}"
+      >Max seats:</label>
+
+      <input
+        type="number"
+        class="form-control"
+        id="maxSeatCount"
+        placeholder=0
+        formControlName="maxSeatCount"
+      >
+      <small class="text-danger" *ngIf="screeningForm.get('maxSeatCount')?.invalid && screeningForm.get('maxSeatCount')?.touched
+        && !screeningForm.get('maxSeatCount')?.errors?.['serverError']"
+      >
+        Seat Count must be 200 or less!
+      </small>
+      <small class="text-danger" *ngIf="screeningForm.get('maxSeatCount')?.errors?.['serverError']">
+        {{screeningForm.get("maxSeatCount")?.errors?.['serverError']}}
+      </small>
+    </div>
+
+    <div class="mb-3">
+      <label
+        for="pictureUrl"
+        class="form-label"
+      >Picture URL:</label>
+
+      <input
+        type="text"
+        class="form-control"
+        id="pictureUrl"
+        placeholder="http://example.com/image.jpg"
+        formControlName="pictureUrl"
+      >
+    </div>
+
+
+
+    <button [disabled]="screeningForm.invalid" type="submit" class="btn btn-primary">Save</button>
+  </form>
+</div>

@@ -1,1 +1,84 @@
-<p>reservation-form works!</p>
+<div class="container w-75 shadow my-3 p-5 rounded">
+  <h1 class="my-3">New Screening</h1>
+  <form [formGroup]="reservationForm" (ngSubmit)="saveReservation()">
+    <div class="mb-3">
+      <label
+        for="name"
+        class="form-label"
+        [ngClass]="{'text-danger':(reservationForm.get('name')?.invalid
+        && reservationForm.get('name')?.touched)}"
+      >Name:</label>
+
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        placeholder="Your Name"
+        formControlName="name"
+        [ngClass]="{'is-invalid':(reservationForm.get('name')?.invalid
+        && reservationForm.get('name')?.touched)}"
+      >
+      <small class="text-danger" *ngIf="reservationForm.get('name')?.invalid
+      && reservationForm.get('name')?.touched"
+      >
+        Please enter a valid name!
+      </small>
+    </div>
+
+
+    <div class="mb-3">
+      <label
+        for="seatCount"
+        class="form-label"
+        [ngClass]="{'text-danger':(reservationForm.get('seatCount')?.invalid
+        && reservationForm.get('seatCount')?.touched)
+        ||(reservationForm.get('seatCount')?.errors?.['serverError'])}"
+      >Number of Seats:</label>
+
+      <input
+        type="number"
+        class="form-control"
+        id="seatCount"
+        placeholder=0
+        formControlName="seatCount"
+      >
+      <small class="text-danger" *ngIf="reservationForm.get('seatCount')?.invalid
+      && reservationForm.get('seatCount')?.touched
+      && !(reservationForm.get('seatCount')?.errors?.['serverError'])"
+      >
+        You need to buy at least 1 seats! No standing around!
+      </small>
+      <small *ngIf="reservationForm.get('seatCount')?.errors?.['serverError']"
+             class="text-danger"
+      >{{reservationForm.get('seatCount')?.errors?.['serverError']}}</small>
+    </div>
+
+    <div class="mb-3">
+      <label for="screeningId"
+             class="form-label"
+             [ngClass]="{'text-danger':(reservationForm.get('screeningId')?.invalid
+             && reservationForm.get('screeningId')?.touched)}"
+      >Screening:</label>
+      <select id="screeningId"
+              class="form-control"
+              formControlName="screeningId"
+              [ngClass]="{'is-invalid':(reservationForm.get('screeningId')?.invalid
+              && reservationForm.get('screeningId')?.touched)}"
+      >
+        <option value="" disabled selected>Please select one option!</option>
+        <option *ngFor="let screeningId of screenings"
+                [value]="screeningId.id"
+        >{{screeningId.title}} - {{screeningId.screeningDateTime}}</option>
+      </select>
+      <small *ngIf="reservationForm.get('screeningId')?.invalid
+              && reservationForm.get('screeningId')?.touched"
+             class="text-danger"
+      >Please choose a screeningId option!</small>
+
+    </div>
+
+
+
+    <button [disabled]="reservationForm.invalid" type="submit" class="btn btn-primary">Save</button>
+  </form>
+</div>

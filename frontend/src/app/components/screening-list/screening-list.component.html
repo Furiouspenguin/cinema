@@ -1,1 +1,25 @@
-<p>screening-list works!</p>
+<div class="container w-75 shadow my-3 p-5 rounded" *ngIf="screenings">
+  <h1 class="text-center mb-3">Screenings:</h1>
+  <table class="table text-center table-hover table-striped">
+    <thead>
+    <tr class="table-success">
+      <th scope="col"></th>
+      <th scope="col">Title</th>
+      <th scope="col">Time of Screening</th>
+      <th scope="col">Total Seats</th>
+      <th scope="col">Free Seats</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let screening of screenings">
+      <td><img *ngIf="isValidUrl(screening.pictureUrl)" [src]="screening.pictureUrl" height="70" alt="Picture of the movie"></td>
+      <th [id]="screening.id">{{screening.title}}</th>
+      <td>{{dateTimeFormatter(screening.screeningDateTime)}}</td>
+      <td>{{screening.maxSeatCount}}</td>
+      <td>{{screening.freeSeatCount}}</td>
+    </tr>
+    </tbody>
+  </table>
+
+
+</div>
